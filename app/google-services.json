@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "480292317978",
+    "project_id": "corded-racer-135621"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480292317978:android:967e04db4ff7a4b2",
+        "android_client_info": {
+          "package_name": "com.pcastanha.travelguide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480292317978-bsdgok539necnedikqod611hmj5pfnp0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pcastanha.travelguide",
+            "certificate_hash": "C0C05A85EC8327099C40B621D01020CA0B02A3EC"
+          }
+        },
+        {
+          "client_id": "480292317978-ula7pu8395ihp5epnnc4ntneo9tk0r0v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiqb9wUmlI163LtYPG13KmJu3d7B-HdtA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
