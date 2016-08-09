@@ -18,18 +18,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
-            android:authorities="@string/content_authority"
             android:name=".data.TravelGuideProvider"
+            android:authorities="@string/content_authority"
             android:exported="false"
-            android:syncable="true"/>
+            android:syncable="true" />
+
         <service
             android:name=".services.AddressLocationService"
             android:exported="false" />
 
         <activity
             android:name=".LocationsListActivity"
-            android:parentActivityName=".LocationsActivity"></activity>
+            android:parentActivityName=".LocationsActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -43,6 +45,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pcastanha.travelguide.LocationsActivity" />
         </activity>
+
+        <activity android:name=".InsertGuideActivity"
+            android:parentActivityName=".LocationsActivity" />
+
     </application>
 
 </manifest>

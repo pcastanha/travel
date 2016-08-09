@@ -20,6 +20,9 @@ public class LocationsActivity extends AppCompatActivity implements LocationsFra
             case R.id.action_setting:
                 Intent settingIntent = new Intent(this, SettingsActivity.class);
                 startActivity(settingIntent);
+            case R.id.action_insert:
+                Intent insertIntent = new Intent(this, InsertGuideActivity.class);
+                startActivity(insertIntent);
             default:
                 return super.onOptionsItemSelected(item);
         }

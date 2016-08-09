@@ -7,6 +7,7 @@ public final class ConstantsUtil {
 
     public static final int SUCCESS_CONST = 0;
     public static final int FAILURE_CONST = 1;
+    public static final int TWO_MINUTES = 1000 * 60 * 2;
     public static final String PACKAGE_NAME = "com.pcastanha.travelguide";
     public static final String RECEIVER = PACKAGE_NAME + ".RECEIVER";
     public static final String RESULT_DATA_KEY = PACKAGE_NAME + ".RESULT_DATA_KEY";
