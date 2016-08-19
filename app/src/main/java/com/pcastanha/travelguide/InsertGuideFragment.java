@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -30,6 +31,7 @@ import java.util.List;
 public class InsertGuideFragment extends Fragment implements OnMapReadyCallback {
 
     private List<LatLng> mLocations;
+    private GuideAdapter mDataAdapter;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -93,10 +95,12 @@ public class InsertGuideFragment extends Fragment implements OnMapReadyCallback 
         //    }
         //});
 
+        mLocations = new ArrayList<>();
+        mDataAdapter = new GuideAdapter(getActivity(),R.layout.listview_guide_layout, mLocations);
+        ListView listView = (ListView) rootView.findViewById(R.id.listView_guide_items);
+        listView.setAdapter(mDataAdapter);
         MapFragment mapFragment = (MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.fragment);
         mapFragment.getMapAsync(this);
-
-        mLocations = new ArrayList<>();
 
         return rootView;
     }
@@ -135,6 +139,7 @@ public class InsertGuideFragment extends Fragment implements OnMapReadyCallback 
                 markerOptions.position(latLng);
                 mLocations.add(latLng);
                 googleMap.addMarker(markerOptions);
+                mDataAdapter.notifyDataSetChanged();
             }
         });
 
@@ -143,6 +148,7 @@ public class InsertGuideFragment extends Fragment implements OnMapReadyCallback 
             public boolean onMarkerClick(Marker marker) {
                 marker.remove();
                 mLocations.remove(marker.getPosition());
+                mDataAdapter.notifyDataSetChanged();
                 return true;
             }
         });
