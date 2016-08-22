@@ -1,4 +1,4 @@
-package com.pcastanha.travelguide;
+package com.pcastanha.travelguide.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class LocationsActivity extends AppCompatActivity implements LocationsFragment.OnFragmentInteractionListener{
+import com.pcastanha.travelguide.fragments.LocationsFragment;
+import com.pcastanha.travelguide.R;
+
+public class LocationsActivity extends AppCompatActivity implements LocationsFragment.OnFragmentInteractionListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_locations, menu);

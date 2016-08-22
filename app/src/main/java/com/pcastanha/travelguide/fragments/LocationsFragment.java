@@ -1,4 +1,4 @@
-package com.pcastanha.travelguide;
+package com.pcastanha.travelguide.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -39,6 +39,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.pcastanha.travelguide.utils.ConstantsUtil;
+import com.pcastanha.travelguide.R;
+import com.pcastanha.travelguide.utils.TravelUtils;
+import com.pcastanha.travelguide.activities.LocationsListActivity;
 import com.pcastanha.travelguide.data.TravelGuideContract;
 import com.pcastanha.travelguide.services.AddressLocationService;
 
@@ -117,7 +121,7 @@ public class LocationsFragment extends Fragment implements LocationListener, Goo
                     .build();
         }
 
-        Bitmap photo = BitmapFactory.decodeResource(getResources(),R.mipmap.profile_image);
+        Bitmap photo = BitmapFactory.decodeResource(getResources(), R.mipmap.profile_image);
         String tmp = TravelUtils.convertImageToByteArrayString(photo);
         mProfile = TravelUtils.convertByteArrayStringToBitmap(tmp);
         mResultReceiver = new AddressResultReceiver(new Handler());

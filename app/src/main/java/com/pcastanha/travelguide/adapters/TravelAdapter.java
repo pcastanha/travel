@@ -1,4 +1,4 @@
-package com.pcastanha.travelguide;
+package com.pcastanha.travelguide.adapters;
 
 import android.content.Context;
 import android.database.Cursor;

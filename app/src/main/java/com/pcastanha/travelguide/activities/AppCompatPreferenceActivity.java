@@ -1,4 +1,4 @@
-package com.pcastanha.travelguide;
+package com.pcastanha.travelguide.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

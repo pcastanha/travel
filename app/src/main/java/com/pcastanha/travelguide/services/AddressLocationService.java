@@ -10,7 +10,7 @@ import android.support.v4.os.ResultReceiver;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.pcastanha.travelguide.ConstantsUtil;
+import com.pcastanha.travelguide.utils.ConstantsUtil;
 import com.pcastanha.travelguide.R;
 
 import java.io.IOException;

@@ -1,5 +1,6 @@
 package com.pcastanha.travelguide;
 
+import com.pcastanha.travelguide.activities.LocationsActivity;
 import com.pcastanha.travelguide.data.TravelGuideContract;
 import com.pcastanha.travelguide.data.TravelGuideDbHelper;
 

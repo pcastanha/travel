@@ -1,4 +1,4 @@
-package com.pcastanha.travelguide;
+package com.pcastanha.travelguide.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

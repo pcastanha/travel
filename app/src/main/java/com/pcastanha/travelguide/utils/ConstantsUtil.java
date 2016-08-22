@@ -1,4 +1,4 @@
-package com.pcastanha.travelguide;
+package com.pcastanha.travelguide.utils;
 
 /**
  * Created by pedro.matos.castanha on 6/24/2016.

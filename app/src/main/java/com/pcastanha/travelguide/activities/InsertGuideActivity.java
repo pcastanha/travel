@@ -1,4 +1,4 @@
-package com.pcastanha.travelguide;
+package com.pcastanha.travelguide.activities;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.pcastanha.travelguide.fragments.InsertGuideFragment;
+import com.pcastanha.travelguide.R;
 
 public class InsertGuideActivity extends AppCompatActivity implements InsertGuideFragment.OnFragmentInteractionListener {
 

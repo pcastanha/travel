@@ -1,9 +1,12 @@
-package com.pcastanha.travelguide;
+package com.pcastanha.travelguide.activities;
 
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.pcastanha.travelguide.fragments.LocationsListFragment;
+import com.pcastanha.travelguide.R;
 
 public class LocationsListActivity extends AppCompatActivity implements LocationsListFragment.OnFragmentInteractionListener {
 

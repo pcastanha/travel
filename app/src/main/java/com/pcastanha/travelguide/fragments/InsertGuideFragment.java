@@ -1,38 +1,39 @@
-package com.pcastanha.travelguide;
+package com.pcastanha.travelguide.fragments;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.pcastanha.travelguide.adapters.GuideAdapter;
+import com.pcastanha.travelguide.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link LocationsListFragment.OnFragmentInteractionListener} interface
+ * {@link InsertGuideFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link LocationsListFragment#newInstance} factory method to
+ * Use the {@link InsertGuideFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LocationsListFragment extends Fragment implements OnMapReadyCallback {
+public class InsertGuideFragment extends Fragment implements OnMapReadyCallback {
+
+    private List<LatLng> mLocations;
+    private GuideAdapter mDataAdapter;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -44,7 +45,7 @@ public class LocationsListFragment extends Fragment implements OnMapReadyCallbac
 
     private OnFragmentInteractionListener mListener;
 
-    public LocationsListFragment() {
+    public InsertGuideFragment() {
         // Required empty public constructor
     }
 
@@ -54,11 +55,11 @@ public class LocationsListFragment extends Fragment implements OnMapReadyCallbac
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment LocationsListFragment.
+     * @return A new instance of fragment InsertGuideFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LocationsListFragment newInstance(String param1, String param2) {
-        LocationsListFragment fragment = new LocationsListFragment();
+    public static InsertGuideFragment newInstance(String param1, String param2) {
+        InsertGuideFragment fragment = new InsertGuideFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -77,28 +78,30 @@ public class LocationsListFragment extends Fragment implements OnMapReadyCallbac
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_locations_list, container, false);
-        ListView locationList = (ListView) rootView.findViewById(R.id.listView);
-        //MapFragment mapFragment = MapFragment.newInstance(initMapOptions());
+        // Inflate the layout for this fragment
 
-        String[] dummyList = {
-                "First Element - Location Name - Other stuff",
-                "Second Element - Location Name - Other stuff",
-                "Third Element - Location Name - Other stuff",
-                "Fourth Element - Location Name - Other stuff",
-                "Fifth Element - Location Name - Other stuff"
-        };
+        View rootView = inflater.inflate(R.layout.fragment_insert_guide, container, false);
+        //EditText editText = (EditText) rootView.findViewById(R.id.guide_title);
 
-        List<String> dummyArray = new ArrayList<>(Arrays.asList(dummyList));
+        //editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        //    @Override
+        //    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        //        boolean handled = false;
+        //       if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    // sendMessage();
+        //            Toast newToast = Toast.makeText(getActivity(), "Title Saved!",Toast.LENGTH_SHORT);
+        //            newToast.show();
+        //            handled = true;
+        //        }
+        //        return handled;
+        //    }
+        //});
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                R.layout.main_activity_single_item,
-                R.id.main_single_item,
-                dummyArray);
-
-        locationList.setAdapter(adapter);
-
-        MapFragment mapFragment = (MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.map);
+        mLocations = new ArrayList<>();
+        mDataAdapter = new GuideAdapter(getActivity(),R.layout.listview_guide_layout, mLocations);
+        ListView listView = (ListView) rootView.findViewById(R.id.listView_guide_items);
+        listView.setAdapter(mDataAdapter);
+        MapFragment mapFragment = (MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.fragment);
         mapFragment.getMapAsync(this);
 
         return rootView;
@@ -129,9 +132,29 @@ public class LocationsListFragment extends Fragment implements OnMapReadyCallbac
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        Log.d(LocationsListFragment.class.getSimpleName(), "MapReady");
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-22.7146,-47.656),13));
+    public void onMapReady(final GoogleMap googleMap) {
+
+        googleMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+                mLocations.add(latLng);
+                googleMap.addMarker(markerOptions);
+                mDataAdapter.notifyDataSetChanged();
+            }
+        });
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                marker.remove();
+                mLocations.remove(marker.getPosition());
+                mDataAdapter.notifyDataSetChanged();
+                return true;
+            }
+        });
+
     }
 
     /**
@@ -147,24 +170,5 @@ public class LocationsListFragment extends Fragment implements OnMapReadyCallbac
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    private GoogleMapOptions initMapOptions(){
-        GoogleMapOptions options = new GoogleMapOptions();
-
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(-22.7146,-47.656))       // Sets the center of the map to Mountain View
-                .zoom(13)                                   // Sets the zoom
-                .bearing(0)                                 // Sets the orientation of the camera to east
-                .tilt(90)                                   // Sets the tilt of the camera to 30 degrees
-                .build();                                   // Creates a CameraPosition from the builder
-
-        options.mapType(GoogleMap.MAP_TYPE_SATELLITE)
-                .compassEnabled(false)
-                .rotateGesturesEnabled(false)
-                .tiltGesturesEnabled(false)
-                .camera(cameraPosition);
-
-        return options;
     }
 }
