@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -15,8 +16,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.pcastanha.travelguide.adapters.GuideAdapter;
 import com.pcastanha.travelguide.R;
+import com.pcastanha.travelguide.adapters.GuideAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +102,12 @@ public class InsertGuideFragment extends Fragment implements OnMapReadyCallback 
         mDataAdapter = new GuideAdapter(getActivity(),R.layout.listview_guide_layout, mLocations);
         ListView listView = (ListView) rootView.findViewById(R.id.listView_guide_items);
         listView.setAdapter(mDataAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //PopupWindow popup = new PopupWindow(Put View here, 0,0, true);
+            }
+        });
         MapFragment mapFragment = (MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.fragment);
         mapFragment.getMapAsync(this);
 
